@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ready_companent/butons/dropdown.dart';
+import 'package:ready_companent/butons/eleveted.dart';
+import 'package:ready_companent/butons/popmunu.dart';
+import 'package:ready_companent/butons/slaydder.dart';
 
 class ButonList extends StatefulWidget {
   const ButonList({super.key});
@@ -10,18 +14,12 @@ class ButonList extends StatefulWidget {
 
 class _ButonListState extends State<ButonList> {
   final _appbarTitle = 'All Button List';
-  final _elevatedButon = 'Elevated Buton';
-  final _elevatedButonClick = 'Elevated Buton Click';
-  final MaterialStatesController _materialStatesController =
-      MaterialStatesController();
 
   final _textButon = 'Text Buton';
   final _textButonClick = 'Text Buton Click';
 
   final _outlinedButon = 'Outlined Buton';
   final _chipText = 'Chip';
-
-  String _popMenuItem = 'PopupMenuButon';
 
   String? selecTedOption;
   bool isChecks = true;
@@ -31,6 +29,8 @@ class _ButonListState extends State<ButonList> {
   bool isSwitcSelected = true;
 
   double _sliderValue = 0.0;
+  final double _sliderValueCupartino = 0.0;
+
   int _currentStep = 0;
 
   final List<bool> _selections = List.generate(3, (_) => false);
@@ -46,14 +46,15 @@ class _ButonListState extends State<ButonList> {
           padding: const EdgeInsets.only(left: 30, right: 30),
           child: ListView(
             children: [
-              eleveteedButon(_elevatedButonClick),
+              const LearnElevated(),
               textButon(),
               outlinedButon(),
               iconButon(),
               sizeBox(),
-              dropDownButton(),
+              const LearnDropDown(),
               sizeBox(),
-              popMenuButon(),
+
+              const LearnPopopMenu(),
               sizeBox(),
               cupertinaButon(),
               sizeBox(),
@@ -68,7 +69,7 @@ class _ButonListState extends State<ButonList> {
               sizeBox(),
               cupertinoSwitch(),
               sliderText(),
-              sliderButon(),
+              LearnSlayder(sliyderValue: _sliderValue),
               cupertinoSlider(),
               //ADım adım olan işlemlerde
               //stepper(),
@@ -135,30 +136,10 @@ class _ButonListState extends State<ButonList> {
   CupertinoSlider cupertinoSlider() {
     return CupertinoSlider(
       divisions: 10,
-      value: _sliderValue,
+      value: _sliderValueCupartino,
       onChanged: (value) {
         setState(() {
           _sliderValue = value;
-        });
-      },
-    );
-  }
-
-  Slider sliderButon() {
-    return Slider(
-      thumbColor: Colors.green,
-      divisions: 10,
-      autofocus: true,
-      activeColor: Colors.red,
-      // Değer aralığı
-      min: 0.0,
-      max: 100.0,
-      // Başlangıç değeri
-      value: _sliderValue,
-      // Değer değiştiğinde çalışacak fonksiyon
-      onChanged: (newValue) {
-        setState(() {
-          _sliderValue = newValue;
         });
       },
     );
@@ -214,6 +195,7 @@ class _ButonListState extends State<ButonList> {
       onChanged: (value) {
         setState(() {
           selectedRadioButonValue = value;
+          debugPrint(value);
         });
       },
     );
@@ -247,60 +229,7 @@ class _ButonListState extends State<ButonList> {
     );
   }
 
-  PopupMenuButton<String> popMenuButon() {
-    return PopupMenuButton(
-      child: Text(_popMenuItem),
-      itemBuilder: (context) {
-        return [
-          const PopupMenuItem<String>(
-            value: 'item1',
-            child: Text('Öğe 1'),
-          ),
-          const PopupMenuItem<String>(
-            value: 'item2',
-            child: Text('Öğe 2'),
-          ),
-          const PopupMenuItem<String>(
-            value: 'item3',
-            child: Text('Öğe 3'),
-          ),
-        ];
-      },
-      onSelected: (value) {
-        setState(() {
-          _popMenuItem = value;
-        });
-      },
-    );
-  }
-
   SizedBox sizeBox() => const SizedBox(height: 25);
-
-  DropdownButton<String> dropDownButton() {
-    return DropdownButton<String>(
-      // İlk öğe görüntülenen metin, ikinci öğe değer
-      items: const [
-        DropdownMenuItem(
-          value: 'option1',
-          child: Text('Seçenek 1'),
-        ),
-        DropdownMenuItem(
-          value: 'option2',
-          child: Text('Seçenek 2'),
-        ),
-        DropdownMenuItem(
-          value: 'option3',
-          child: Text('Seçenek 3'),
-        ),
-      ],
-      value: selecTedOption,
-      onChanged: (value) {
-        // Seçilen değeri güncelle
-        selecTedOption = value;
-        setState(() {});
-      },
-    );
-  }
 
   FloatingActionButton floatingButon() {
     return FloatingActionButton(
@@ -319,76 +248,12 @@ class _ButonListState extends State<ButonList> {
 
   TextButton textButon() {
     return TextButton(
+        //Ekran okuyucularının görmesini sağlar.Körler için
+        isSemanticButton: true,
         onPressed: () {
           debugPrint(_textButonClick);
         },
         child: Text(_textButon));
-  }
-
-  ElevatedButton eleveteedButon(String dat) {
-    return ElevatedButton(
-      // Sayfa açıldığında otomatik butona odaklanmasını sağlar
-      autofocus: true,
-      //widgetın sınırlamasını ayarlar
-      //? clipBehavior: Clip.antiAlias,
-
-      // mause butonun üzerine gelince yapılacakları gösterrir
-      //? onHover: (isHovering) {
-      //   // Düğmenin üzerine gelindiğinde veya üzerinden çıkıldığında gerçekleştirilecek işlev
-      //   if (isHovering) {
-      //     // Düğmenin üzerine gelindiğinde yapılacak işlemler
-      //     print('Düğmenin üzerine gelindi');
-      //   } else {
-      //     // Düğmenin üzerinden çıkıldığında yapılacak işlemler
-      //     print('Düğmenin üzerinden çıkıldı');
-      //   }
-      // },
-
-      //BUTONA UZUN TIKLAMA
-      //? onLongPress: ,
-
-      statesController: _materialStatesController,
-      style: ElevatedButton.styleFrom(
-        shadowColor: Colors.black, // Gölgelendirme rengi
-        elevation: 4, // Düğme yüksekliği
-        padding: const EdgeInsets.symmetric(
-            vertical: 16, horizontal: 24), // İçerik dolgusu
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8), // Düğme kenar yuvarlaklığı
-          side: const BorderSide(
-              color: Colors.black, width: 2), // Kenarlık oluşturur
-        ),
-        minimumSize: const Size(120, 48), // Minimum düğme boyutu
-        fixedSize: const Size(200, 64), // Sabit düğme boyutu
-        textStyle: const TextStyle(fontSize: 18), // Düğme metin stili
-        alignment:
-            Alignment.center, // Düğme içeriğini düğmenin ortasına hizalar
-        tapTargetSize: MaterialTapTargetSize.shrinkWrap, // Dokunma hedef boyutu
-        animationDuration:
-            const Duration(milliseconds: 200), // Animasyon süresi
-        enableFeedback: true, // Geribildirim etkinleştirme
-
-        visualDensity: VisualDensity.standard, // Görüntü yoğunluğu
-        backgroundColor: Colors.red, // Arkaplan rengi
-        disabledBackgroundColor:
-            Colors.green, // Devre dışı bırakıldığında düğmenin arka plan rengi
-        disabledForegroundColor: Colors
-            .yellowAccent, // Devre dışı bırakıldığında düğmenin ön plan rengi
-        foregroundColor: Colors.blue, // Düğmenin ön plan rengi (metin rengi)
-        side: const BorderSide(
-          color: Colors.greenAccent, // Kenar çizgisi rengi
-          strokeAlign:
-              0, // Çizgi çizilirken kullanılan koordinat sisteminin hizalanması
-          style:
-              BorderStyle.solid, // Kenar çizgisi stili (kesikli, sürekli, vb.)
-          width: 10, // Kenar çizgisi kalınlığı
-        ),
-      ),
-      onPressed: () {
-        debugPrint(dat);
-      },
-      child: Text(_elevatedButon),
-    );
   }
 
   List<Step> _stepperSteps() {
