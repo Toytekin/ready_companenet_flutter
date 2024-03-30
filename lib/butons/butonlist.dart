@@ -12,6 +12,8 @@ class _ButonListState extends State<ButonList> {
   final _appbarTitle = 'All Button List';
   final _elevatedButon = 'Elevated Buton';
   final _elevatedButonClick = 'Elevated Buton Click';
+  final MaterialStatesController _materialStatesController =
+      MaterialStatesController();
 
   final _textButon = 'Text Buton';
   final _textButonClick = 'Text Buton Click';
@@ -325,6 +327,63 @@ class _ButonListState extends State<ButonList> {
 
   ElevatedButton eleveteedButon(String dat) {
     return ElevatedButton(
+      // Sayfa açıldığında otomatik butona odaklanmasını sağlar
+      autofocus: true,
+      //widgetın sınırlamasını ayarlar
+      //? clipBehavior: Clip.antiAlias,
+
+      // mause butonun üzerine gelince yapılacakları gösterrir
+      //? onHover: (isHovering) {
+      //   // Düğmenin üzerine gelindiğinde veya üzerinden çıkıldığında gerçekleştirilecek işlev
+      //   if (isHovering) {
+      //     // Düğmenin üzerine gelindiğinde yapılacak işlemler
+      //     print('Düğmenin üzerine gelindi');
+      //   } else {
+      //     // Düğmenin üzerinden çıkıldığında yapılacak işlemler
+      //     print('Düğmenin üzerinden çıkıldı');
+      //   }
+      // },
+
+      //BUTONA UZUN TIKLAMA
+      //? onLongPress: ,
+
+      statesController: _materialStatesController,
+      style: ElevatedButton.styleFrom(
+        shadowColor: Colors.black, // Gölgelendirme rengi
+        elevation: 4, // Düğme yüksekliği
+        padding: const EdgeInsets.symmetric(
+            vertical: 16, horizontal: 24), // İçerik dolgusu
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8), // Düğme kenar yuvarlaklığı
+          side: const BorderSide(
+              color: Colors.black, width: 2), // Kenarlık oluşturur
+        ),
+        minimumSize: const Size(120, 48), // Minimum düğme boyutu
+        fixedSize: const Size(200, 64), // Sabit düğme boyutu
+        textStyle: const TextStyle(fontSize: 18), // Düğme metin stili
+        alignment:
+            Alignment.center, // Düğme içeriğini düğmenin ortasına hizalar
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap, // Dokunma hedef boyutu
+        animationDuration:
+            const Duration(milliseconds: 200), // Animasyon süresi
+        enableFeedback: true, // Geribildirim etkinleştirme
+
+        visualDensity: VisualDensity.standard, // Görüntü yoğunluğu
+        backgroundColor: Colors.red, // Arkaplan rengi
+        disabledBackgroundColor:
+            Colors.green, // Devre dışı bırakıldığında düğmenin arka plan rengi
+        disabledForegroundColor: Colors
+            .yellowAccent, // Devre dışı bırakıldığında düğmenin ön plan rengi
+        foregroundColor: Colors.blue, // Düğmenin ön plan rengi (metin rengi)
+        side: const BorderSide(
+          color: Colors.greenAccent, // Kenar çizgisi rengi
+          strokeAlign:
+              0, // Çizgi çizilirken kullanılan koordinat sisteminin hizalanması
+          style:
+              BorderStyle.solid, // Kenar çizgisi stili (kesikli, sürekli, vb.)
+          width: 10, // Kenar çizgisi kalınlığı
+        ),
+      ),
       onPressed: () {
         debugPrint(dat);
       },
@@ -354,8 +413,6 @@ class _ButonListState extends State<ButonList> {
 }
 
 
-
-
 // ElevatedButton: Yükseltilmiş bir düğme oluşturur. Material Design stilinde bir düğmedir.
 
 // TextButton: Metin tabanlı bir düğme oluşturur. Genellikle içeriği daha az belirgin olan durumlarda tercih edilir.
@@ -371,7 +428,6 @@ class _ButonListState extends State<ButonList> {
 // PopupMenuButton: Bir popup menüyü tetiklemek için bir düğme oluşturur. Kullanıcılar bağlam menüsünden bir seçim yapabilir.
 
 // CupertinoButton: iOS stiline uygun bir düğme oluşturur. iOS uygulamalarında kullanılan standart düğmelerle uyumlu olması için tasarlanmıştır.
-
 
 // Checkbox: Kullanıcının bir onay kutusunu işaretleyip işaretlememesini sağlar.
 // RadioButton: Kullanıcının bir listeden yalnızca bir öğeyi seçmesini sağlar.
