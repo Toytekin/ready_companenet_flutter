@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ready_companent/butons/custombutons/custom_butons.dart';
 import 'package:ready_companent/butons/dropdown.dart';
 import 'package:ready_companent/butons/eleveted.dart';
 import 'package:ready_companent/butons/popmunu.dart';
@@ -40,6 +41,17 @@ class _ButonListState extends State<ButonList> {
     return Scaffold(
       appBar: AppBar(
         title: Text(_appbarTitle),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) {
+                    return CustomButonPage();
+                  },
+                ));
+              },
+              icon: const Icon(Icons.next_plan))
+        ],
       ),
       body: Center(
         child: Padding(
