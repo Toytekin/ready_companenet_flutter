@@ -46,7 +46,7 @@ class _ButonListState extends State<ButonList> {
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) {
-                    return CustomButonPage();
+                    return const CustomButonPage();
                   },
                 ));
               },
@@ -114,8 +114,8 @@ class _ButonListState extends State<ButonList> {
 
   Tooltip toolTip() {
     return const Tooltip(
-      child: Text('Tool Tip'),
       message: 'Bu Tool tip mesajıdır',
+      child: Text('Tool Tip'),
     );
   }
 

@@ -68,7 +68,7 @@ class LearnElevated extends StatelessWidget {
         ),
       ),
       onPressed: () {},
-      child: Text(elevatedButon),
+      child: const Text(elevatedButon),
     );
   }
 }

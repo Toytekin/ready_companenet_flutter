@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ready_companent/butons/buton_pacgaat.dart/paket_main.dart';
 import 'package:ready_companent/butons/custombutons/custom_one.dart';
 import 'package:ready_companent/butons/custombutons/custom_two.dart';
 
@@ -33,13 +34,15 @@ class _CustomButonPageState extends State<CustomButonPage> {
                 },
               ),
               CustomTwo(
-                title: 'İbrahim Toytekin',
-                color: Colors.green,
+                title: 'Paketlerle Butonlar',
+                color: Colors.red,
                 size: 100,
                 onPress: () {
-                  setState(() {
-                    cirCularDurum = !cirCularDurum;
-                  });
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ButonsPaketMain()),
+                  );
                 },
               ),
             ],
